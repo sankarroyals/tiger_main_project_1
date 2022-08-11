@@ -1,7 +1,7 @@
 
 import "./home.scss";
 import Table from "../../components/table/Table";
-
+// added home
 
 const Home = () => {
 
