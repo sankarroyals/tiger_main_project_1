@@ -1,0 +1,95 @@
+.widget {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  padding: 15px;
+  
+  box-shadow: 0 0 2px rgba(0,0,0,0.6);
+  
+  height: 150px;
+
+.right{
+ 
+  font-size: 20px;
+  margin-right: 10px;
+  position: relative;
+
+
+  .inT{
+    position: absolute;
+    font-size: 14px;
+    color:#88b6e0;
+    padding:0 5px;
+    font-weight:600;
+
+    border-radius: 50%;
+    top:0;
+    right:-10px;
+    background-color:#c4daef;
+  }
+
+  .inR{
+    margin-top: 30px;
+    background-color:#c4daef;
+    padding: 10px 12px;
+    border-radius: 50%;
+    i{
+      color: #63aaec;
+      cursor: pointer;
+    }
+  }
+
+}
+
+  .left,
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+
+    .title {
+      font-weight: bold;
+      font-size: 14px;
+      color: black;
+    }
+
+    .counter {
+      font-size: 28px;
+      font-weight: 600;
+      color: black;
+    }
+
+    .link {
+      width: max-content;
+      font-size: 12px;
+      border-bottom: 1px solid gray;
+    }
+
+    .percentage {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+
+      &.positive {
+        color: rgb(9, 207, 9);
+        font-weight: bold;
+        .te{
+          color: rgba(104, 98, 98, 0.304);
+          font-weight:100;
+          margin-left: 10px;
+        }
+      }
+      &.negative {
+        color: red;
+      }
+    }
+
+    .icon {
+      font-size: 18px;
+      padding: 5px;
+      border-radius: 5px;
+      align-self: flex-end;
+    }
+  }
+}

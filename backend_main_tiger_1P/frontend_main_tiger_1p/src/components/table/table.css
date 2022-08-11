@@ -1,0 +1,53 @@
+.table .tableCell {
+  font-size: 10px;
+}
+
+.table .head {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.table .cellWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.table .cellWrapper .image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.table .status {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.table .status.approved {
+  color: white;
+  background-color: green;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.table .status.pending {
+  color: white;
+  background-color: #ebc463;
+  padding: 5px 8px;
+  border-radius: 50%;
+}
+
+.table .status.canceled {
+  color: white;
+  background-color: red;
+  padding: 5px 8px;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=table.css.map */
