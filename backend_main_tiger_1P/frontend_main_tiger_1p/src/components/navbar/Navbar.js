@@ -20,32 +20,32 @@ const Navbar = () => {
             color: "#22252A",
             textTransform: "uppercase",
             opacity: "1",
-          }}>Mlcore</strong></h6>
+          }}>Tiger Data Validation</strong></h6>
         </Link>
         <div className="items">
           <div className="item">
-            <p> Predictive model for MCK</p>
+            <p> </p>
           </div>
           <div className="item">
-            <p> Overview</p>
+            <p> </p>
           </div>
           <div className="item">
-            <p> Prepare Data</p>
+            <p> </p>
           </div>
           <div className="item">
-            <p> Explore</p>
+            <p> </p>
           </div>
           <div className="item">
-            <p> Train</p>
+            <p> </p>
           </div>
           <div className="item">
-            <p>Interpret</p>
+            <p></p>
           </div>
           <div className="item">
-            <p>Data Prep Inference</p>
+            <p></p>
           </div>
           <div className="item">
-            <p>Model Monitor</p>
+            <p></p>
           </div>
         </div>
       </div>
