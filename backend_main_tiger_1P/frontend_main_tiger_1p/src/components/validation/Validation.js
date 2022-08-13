@@ -6,17 +6,24 @@ import { makeStyles } from "@material-ui/core/styles";
 import './validation.scss'
 
 
-const Validation = ({setInputs,saveData}) => {
+const Validation = ({saveData}) => {
     const [input1, setInput1] = useState(0)
     const [input2, setInput2] = useState(0)
+    const [load,setLoad] = useState(false)
 
     const handleInputs = ()=>{
-        setInputs([input1,input2])
+        // you can call the api for validate
+        setLoad(true)
 
+    console.log(input1,input2)
+       setTimeout(()=>{
+        
+        setLoad(false)
         // calling saveData() which is in Home.js
-        saveData()
+        saveData([input1,input2])
         setInput1('')
         setInput2('')
+       },3000)
     }
 
     return (
@@ -48,9 +55,12 @@ const Validation = ({setInputs,saveData}) => {
 
                    {input1 > 0 ? 
                    (input2>0 ? 
-                   <Button variant='outlined' style={{marginLeft:"50px"}} 
+                   (!load ? <Button variant='outlined' style={{marginLeft:"50px"}} 
                     onClick={handleInputs}
                     >Save</Button>
+                    :
+                  <div className='loader m-auto'>Loading</div>
+                    )
                     :
 
                     <Button variant='outlined' disabled style={{marginLeft:"50px",color:"red"}}>Please Enter Inputs</Button>

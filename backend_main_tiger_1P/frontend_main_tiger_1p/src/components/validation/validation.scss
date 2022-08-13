@@ -1,4 +1,31 @@
 .cover{
+     .loader{
+        width: 40px;
+        height: 40px;
+        border-top: 2px solid#0cc45c;
+        animation-name: spin;
+        animation-duration: 0.9s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear; 
+       border-radius: 50%;
+      
+      
+      @keyframes spin {
+          0% {
+              transform:rotate(0deg);
+              border-top: 2px solid#0cc45c;
+          }
+          50%{
+            transform:rotate(180deg);
+              border-top: 2px solid#28cfd5;
+          }
+          100% {
+            transform:rotate(360deg);
+            border-top: 2px solid#b4ce22;
+          }
+      }
+    }
+    
     p{
         color:rgb(7, 7, 7);
         font-weight: 900;
@@ -14,7 +41,7 @@
         padding: 10px;
         &:focus{
             outline: none;
-            border:3px solid blue !important;
+            border:1px solid rgb(0, 255, 38) !important;
         }
     }
 }

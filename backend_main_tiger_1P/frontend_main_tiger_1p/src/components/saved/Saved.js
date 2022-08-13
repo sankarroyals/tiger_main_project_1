@@ -15,103 +15,7 @@ import { Search } from "js-search";
 const Saved = () => {
   const [pageN, setPage] = useState(8)
   const [load, setLoad] = useState(false)
-  const [rows, setRows] = useState([
-   
-    {
-      "id": 995,
-      "column": "Sankar",
-      "Expectation": "Weather Forecast",
-      "Database":"tiger",
-      
-      
-    },
-    {
-      "id": 996,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-     "Database":"tiger",
-     
-    },
-    {
-      "id": 997,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-      "Database":"tiger",
-      
-    },
-    {
-      "id": 998,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-      "Database":"tiger",
-      
-    },
-    {
-      "id": 999,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-      "Database":"tiger",
-      
-    },
-    {
-      "id": 1000,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-      "Database":"tiger",
-      
-    },
-    {
-      "id": 1001,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-      "Database":"tiger",
-      
-    },
-    {
-      "id": 1002,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-    "Database":"tiger",
-    
-    },
-    {
-      "id": 1003,
-      "column": "Sankar",
-      "Expectation": "Weather Forecast",
-      "Database":"tiger",
-      
-    },
-    {
-      "id": 1004,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-     "Database":"tiger",
-     
-    },
-    {
-      "id": 1005,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-      "Database":"tiger",
-      
-    },
-    {
-      "id": 1006,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-     "Database":"tiger",
-     
-    },
-    {
-      "id": 1007,
-      "column": "Wind Energy Forest",
-      "Expectation": "Weather Forecast",
-      "Database":"tiger",
-      
-    },
-    
-  
-  ]);
+  const [rows, setRows] = useState([]);
 
 
 
@@ -119,19 +23,20 @@ const Saved = () => {
   const [search, setSearch] = useState([])
   const [se, setSe] = useState('')
 
-  useEffect(()=>{
-    if(localStorage.getItem('savedData')){
-      setSearch(JSON.parse(localStorage.getItem('savedData')))
-      
-    }
-    else{
-      localStorage.setItem('savedData',JSON.stringify(rows))
-    }
-    
+  useEffect(() => {
+    if (localStorage.getItem('savedData')) {
+      setRows(JSON.parse(localStorage.getItem('savedData')))
 
-  },[rows])
+    }
 
- 
+
+
+  }, [])
+  useEffect(() => {
+    setSearch([...rows])
+  }, [rows])
+
+
 
 
 
@@ -142,24 +47,24 @@ const Saved = () => {
     setSe(e.target.value)
     if (e.target.value !== '') {
 
-  
-      var sea= new Search('id')
+
+      var sea = new Search('id')
       sea.addIndex('column')
-      
-      sea.addIndex( 'Expectation')
+
+      sea.addIndex('Expectation')
 
       sea.addDocuments([...rows])
-  
+
       const d = sea.search(e.target.value)
 
 
       setSearch(d)
-    
+
     }
     //use time ==> jssearch, use => react table, material ui, loadsh
     else {
       setSe('')
-      setSearch([...rows])
+      setSearch([...JSON.parse(localStorage.getItem('savedData'))])
     }
 
   }
@@ -173,20 +78,20 @@ const Saved = () => {
   const datas = async () => {
     const s = document.documentElement.scrollHeight - window.innerHeight
     const sc = window.scrollY
-    
+
 
     if (Math.ceil(sc) === s) {
-     
-        setPage(pageN+1)
-        setLoad(false)
-       
+
+      setPage(pageN + 1)
+      setLoad(false)
+
     }
-    
+
 
   }
 
   if (pageN < rows.length) {
-    
+
 
     setTimeout(() => {
       setLoad(true)
@@ -199,28 +104,28 @@ const Saved = () => {
 
   }
 
- 
-
-  
-    
-  
 
 
-  const edit =(id)=>{
-    const data = rows.filter(r=>r.id===id)
+
+ rows.map(r=>console.log(r.inputs[0]))
+
+
+
+  const edit = (id) => {
+    const data = rows.filter(r => r.id === id)
     console.log(data[0].column)
   }
-  const deletion = (id) =>{
+  const deletion = (id) => {
     const rows = JSON.parse(localStorage.getItem('savedData'))
-    const data = rows.filter(r=>r.id!==id)
-    localStorage.setItem('savedData',JSON.stringify(data))
+    const data = rows.filter(r => r.id !== id)
+    localStorage.setItem('savedData', JSON.stringify(data))
     setRows(JSON.parse(localStorage.getItem('savedData')))
   }
 
 
 
 
-//reduce row height
+  //reduce row height
   return (
 
     <>
@@ -244,9 +149,10 @@ const Saved = () => {
               <TableCell className="tableCell head">ID</TableCell>
               <TableCell className="tableCell head">COLUMNS</TableCell>
               <TableCell className="tableCell head">EXPECTATIONS</TableCell>
+              <TableCell className="tableCell head">INPUTS</TableCell>
               <TableCell className="tableCell head">EDIT</TableCell>
               <TableCell className="tableCell head">DELETE</TableCell>
-              
+
             </TableRow>
           </TableHead>
           <TableBody>
@@ -254,20 +160,24 @@ const Saved = () => {
 
               <>
                 {index < pageN && <TableRow key={row.id}>
-                <TableCell className="tableCell bo">{row.id}</TableCell>
+                  <TableCell className="tableCell bo">{row.id}</TableCell>
 
                   <TableCell className="tableCell bo">{row.column}</TableCell>
 
                   <TableCell className="tableCell bo">{row.Expectation}</TableCell>
-
                   <TableCell className="tableCell">
-                   
-                  <i class="fa-solid fa-pen-to-square edit" onClick={()=>{edit(row.id)}}></i>
-                  </TableCell>
-                  <TableCell className="tableCell">
-                  <i class="fa-solid fa-trash del"  onClick={()=>{deletion(row.id)}}></i>
-                  </TableCell>
                   
+                    {row.inputs[0].map((i)=><p>{i}</p>)}
+                  
+                  </TableCell>
+                  <TableCell className="tableCell">
+
+                    <i class="fa-solid fa-pen-to-square edit" onClick={() => { edit(row.id) }}></i>
+                  </TableCell>
+                  <TableCell className="tableCell">
+                    <i class="fa-solid fa-trash del" onClick={() => { deletion(row.id) }}></i>
+                  </TableCell>
+
                 </TableRow>}
               </>
             ))}
@@ -275,7 +185,7 @@ const Saved = () => {
         </Table>
 
       </TableContainer>
-      {load === true && <p style={{textAlign:"center",padding:"15px"}}>Loading More...</p>}
+      {load === true && <p style={{ textAlign: "center", padding: "15px" }}>Loading More...</p>}
     </>
   );
 };

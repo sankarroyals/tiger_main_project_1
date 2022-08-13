@@ -24,12 +24,24 @@ const Home = () => {
 
 
   const [projectName, setProjectname] = useState('')
-
+  
   //fetch this project names from api
   const [projects, setProjects] = useState(['sankar', 'mukesh', 'tiger'])
 
+  useEffect(()=>{
+    //useEffect for getting project names
+
+  },[])
+
+
   // user inputs into this dataset
   const [dataset, setDataset] = useState('')
+  useEffect(()=>{
+    //useEffect for getting dataset names by using project name from api
+
+  },[])
+
+
 
   //used for column heading table
   const [columnHeader, setColumnHeader] = useState([])
@@ -41,13 +53,18 @@ const Home = () => {
   //expectation rows
   const [expRows, setExprow] = useState([])
 
-  const [showTable, setShowTable] = useState(false)
+  
 
   // storing the column data
-  const [col, setCol] = useState('')
-  const [exp, setExp] = useState('')
+  const [colArray, setColArray] = useState([])
+  const [expArray, setExpArray] = useState([])
 
-  const [inputs, setInputs] = useState([])
+
+  const [col,setCol]  = useState('')
+  const [exp,setExp]  = useState('')
+
+
+
 
 
 
@@ -60,36 +77,54 @@ const Home = () => {
 
   const getData = (e) => {
     //fetch api and place response in rows variable using dataset variable
+    setRows(['id', 'email', 'first_name', 'last_name', 'role'])
 
     setColumnHeader(['columns'])
     setExpectationHeader(['Expectation'])
     setExprow(["Expectation1", "Expectation2", "Expectation3", "Expectation4", "Expectation5"])
-    setRows(['id', 'email', 'first_name', 'last_name', 'role'])
+    
 
   }
 
-  const showPop = (e) => {
+  const showPop = (index) => {
+
+
+    setCol(colArray[index])
+    setExp(expArray[index])
     document.querySelector('.pop').classList.toggle('tran')
     document.querySelector('#overf').classList.toggle('overf')
     console.log(document.querySelector('#overf'))
   }
 
   // saving into local or api
-  const saveData = () => {
-
+  const saveData = (inputs) => {
+    console.log(inputs)
     const data = {
-      "id": 1,
+      "id": Math.floor(Math.random() * 1000) + 1,
       "column": col,
       "Expectation": exp,
-      "Database": projectName
+      "Database": projectName,
+      "inputs":[inputs]
     }
+
     const local = [...JSON.parse(localStorage.getItem('savedData')), data]
+    console.log(local)
     localStorage.setItem('savedData', JSON.stringify(local))
     document.querySelector('#overf').classList.toggle('overf')
+    // console.log(document.querySelector('#overf'))
+    document.querySelector('.pop').classList.toggle('tran')
+    document.querySelector('#overf').classList.remove('overf')
     console.log(document.querySelector('#overf'))
-    navigate('/saved')
+    navigate('/')
 
   }
+
+  useEffect(()=>{
+    console.log(col)
+  
+    console.log(exp)
+
+  },[col,exp])
 
 
 
@@ -121,6 +156,8 @@ const Home = () => {
                   onChange={handleChange}
                   label="Age"
                 >
+
+                
                   {projects.map(p => (<MenuItem value={p}>{p}</MenuItem>))}
 
 
@@ -128,54 +165,62 @@ const Home = () => {
               </FormControl>
 
               <TextField id="standard-basic" label="Data Set" variant="standard" value={dataset}
+              autoComplete="off"
                 onChange={(e) => {
                   setDataset(e.target.value)
                   console.log(e.target.value)
                 }} />
-              {projectName && (dataset && <Button variant="outlined" className="getB display-none" onClick={getData}>Get</Button>)}
+              {projectName && (dataset && <Button variant="outlined" className="getB display-none"  onClick={getData}>Get</Button>)}
 
 
 
 
             </div>
             <div>
-              {col !== '' && (exp !== '' &&
+              {colArray.length !== 0 && 
+              
                 <table className="tb">
-
-                 
-                  <tbody className="bg-dark p-1" >
+               
+                {colArray.map((row,index)=>(
+                  <tbody className="bg-dark p-1 mb-2" style={{position:"relative"}} >
+                   
                     <tr>
                       <td style={{marginTop:"-5px",marginLeft:"10px",color:"white"}}>
-                        {col}
+                        {row}
 
                       </td>
-                      <td style={{marginTop:"-5px",color:"white"}}>{exp}</td>
-                      <td style={{marginTop:"-5px",color:"white"}}>{projectName}</td>
-                      <td style={{marginTop:"-5px",color:"white"}}>{dataset}</td>
-                      <td style={{marginTop:"-10px"}}><Button 
-                        onClick={showPop}>Run</Button></td>
+                      <td style={{marginTop:"-5px",color:"white",position:"absolute",left:"180px"}}>{expArray[index]}</td>
+                      <td style={{marginTop:"-5px",color:"white",position:"absolute",left:"380px"}}>{projectName}</td>
+                      <td style={{marginTop:"-5px",color:"white",position:"absolute",left:"580px"}}>{dataset}</td>
+                      <td style={{marginTop:"-10px"}}>
+                      {expArray[index] &&<Button 
+                        onClick={(e)=>{showPop(index)}}>Run</Button>}
+                        </td>
 
                     </tr>
-                  </tbody>
+                    </tbody>
+                  
+                   ))}
+                  
 
 
                 </table>
-              )
+              
 
               }
             </div>
 
-            <div style={{ width: "900px", marginLeft: "100px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <Table header={columnHeader} data={rows} w="180px" setCol={setCol} />
+          {dataset &&   <div style={{ width: "900px", marginLeft: "100px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <Table header={columnHeader} data={rows} w="180px" setColArray={setColArray} />
               <Table header={ExpectationHeader} data={
                 expRows
-              } w="230px" setExp={setExp} />
-            </div>
+              } w="230px" setExpArray={setExpArray} />
+            </div>}
             <div class="pop">
               <div style={{ width: "100%" }} className="inpop">
                 <div className="vali">
-                  <i class="fa-solid fa-xmark" onClick={showPop} ></i>
-                  <Validation setInputs={setInputs} saveData={saveData} /></div>
+                  <i class="fa-solid fa-xmark" onClick={showPop}></i>
+                  <Validation  saveData={saveData} /></div>
               </div>
             </div>
           </div>

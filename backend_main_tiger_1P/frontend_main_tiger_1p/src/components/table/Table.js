@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import { Search } from "js-search";
 
-const List = ({ header, data, w, setCol,setExp }) => {
+const List = ({ header, data, w, setColArray,setExpArray }) => {
   const [pageN, setPage] = useState(2)
   const [load, setLoad] = useState(false)
  
@@ -59,7 +59,7 @@ const List = ({ header, data, w, setCol,setExp }) => {
                     style={{ cursor: "pointer" }}
                     onClick={(e) => {
                       if (e.target.className === 'col') {
-                        setCol(e.target.innerHTML)
+                        setColArray(prev=>[...prev,e.target.innerHTML])
                       }
                     }}>
 
@@ -74,7 +74,8 @@ const List = ({ header, data, w, setCol,setExp }) => {
                         style={{ cursor: "pointer" }}
                         onClick={(e) => {
                           if (e.target.className === 'col') {
-                            setExp(e.target.innerHTML)
+                            setExpArray(prev=>[...prev,e.target.innerHTML])
+                            
                           }
                         }}>
 
