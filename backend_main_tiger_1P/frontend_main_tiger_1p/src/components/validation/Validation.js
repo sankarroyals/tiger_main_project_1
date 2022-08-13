@@ -7,8 +7,8 @@ import './validation.scss'
 
 
 const Validation = ({setInputs,saveData}) => {
-    const [input1, setInput1] = useState('')
-    const [input2, setInput2] = useState('')
+    const [input1, setInput1] = useState(0)
+    const [input2, setInput2] = useState(0)
 
     const handleInputs = ()=>{
         setInputs([input1,input2])
@@ -46,11 +46,21 @@ const Validation = ({setInputs,saveData}) => {
                             style={{display:"block",margin:"20px",width:"100%",}}/>
 
 
-                    <Button variant='outlined' style={{marginLeft:"50px"}}
+                   {input1 > 0 ? 
+                   (input2>0 ? 
+                   <Button variant='outlined' style={{marginLeft:"50px"}} 
                     onClick={handleInputs}
                     >Save</Button>
+                    :
+
+                    <Button variant='outlined' disabled style={{marginLeft:"50px",color:"red"}}>Please Enter Inputs</Button>
+                    )
+                    :
+                    <Button variant='outlined' style={{marginLeft:"50px",color:"red"}} disabled
+                    
+                    >Please Enter Inputs</Button>
+                    }
                     </Form>
-              
 
 
 

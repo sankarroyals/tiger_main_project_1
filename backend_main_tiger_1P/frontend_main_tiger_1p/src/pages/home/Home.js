@@ -142,14 +142,7 @@ const Home = () => {
               {col !== '' && (exp !== '' &&
                 <table className="tb">
 
-                  <thead>
-                    <tr>
-                      <td>Column</td>
-                      <td>Expectation</td>
-                      <td>Run</td>
-                      <td></td>
-                    </tr>
-                  </thead>
+                 
                   <tbody className="bg-dark p-1" >
                     <tr>
                       <td style={{marginTop:"-5px",marginLeft:"10px",color:"white"}}>
