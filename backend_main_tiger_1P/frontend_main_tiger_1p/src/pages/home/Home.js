@@ -70,7 +70,8 @@ const Home = () => {
 
   const showPop = (e) => {
     document.querySelector('.pop').classList.toggle('tran')
-
+    document.querySelector('#overf').classList.toggle('overf')
+    console.log(document.querySelector('#overf'))
   }
 
   // saving into local or api
@@ -84,7 +85,8 @@ const Home = () => {
     }
     const local = [...JSON.parse(localStorage.getItem('savedData')), data]
     localStorage.setItem('savedData', JSON.stringify(local))
-
+    document.querySelector('#overf').classList.toggle('overf')
+    console.log(document.querySelector('#overf'))
     navigate('/saved')
 
   }
@@ -148,17 +150,17 @@ const Home = () => {
                       <td></td>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="bg-dark p-1" >
                     <tr>
-                      <td>
+                      <td style={{marginTop:"-5px",marginLeft:"10px",color:"white"}}>
                         {col}
 
                       </td>
-                      <td style={{ marginLeft: "40px", position: "absolute", left: "490px" }}>{exp}</td>
-                      <td><Button style={{ marginLeft: "250px", position: "absolute", left: "560px" }}
-                        onClick={showPop}
-
-                      >Run</Button></td>
+                      <td style={{marginTop:"-5px",color:"white"}}>{exp}</td>
+                      <td style={{marginTop:"-5px",color:"white"}}>{projectName}</td>
+                      <td style={{marginTop:"-5px",color:"white"}}>{dataset}</td>
+                      <td style={{marginTop:"-10px"}}><Button 
+                        onClick={showPop}>Run</Button></td>
 
                     </tr>
                   </tbody>

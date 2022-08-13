@@ -27,7 +27,7 @@ const Validation = ({setInputs,saveData}) => {
             <FormContainer>
                     <Form>
                     <p>Enter the inputs</p>
-                    <input  type="number" value={input1}  
+                    <input  type="number" value={input1}  required
                         onChange={(e) => {
                             setInput1(e.target.value)
                             console.log(e.target.value)

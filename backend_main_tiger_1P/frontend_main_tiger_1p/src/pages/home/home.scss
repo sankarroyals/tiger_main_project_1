@@ -23,7 +23,8 @@
           top:0;
           bottom:0;
           right:0;
-          min-height: 100vh !important;
+          min-height: 120vh !important;
+          overflow-y: hidden !important;
           background: black;
           opacity:0.9;
           display: flex;
@@ -42,11 +43,12 @@
             
             
             max-width:900px;
-            margin:0 auto;
+            margin:0 auto !important;
             .vali{
               width: 80%;
               text-align: center;
               background: white;
+              margin-top: -250px !important;
               margin-left:80px !important;
               z-index:999 !important;
               position: relative;
@@ -75,14 +77,15 @@
         .tb{
           display: flex;
           flex-direction: column;
-          width: 800px;
+          width: 939px;
          
-          margin:0 auto;
+          margin:0 80px 0px;
+          padding-left: 20px;
           
           margin-top: 2px;
           padding: 20px;
           thead{
-            
+           display: none;
             padding: 10px;
             border-bottom: 1px solid gray;
             tr{
@@ -96,8 +99,10 @@
           }
           tbody{
             padding-left: 15px;
+
             tr{
               display: flex;
+              text-transform: capitalize;
               justify-content: space-between;
               font-size: 15px;
               margin-top: 10px;
