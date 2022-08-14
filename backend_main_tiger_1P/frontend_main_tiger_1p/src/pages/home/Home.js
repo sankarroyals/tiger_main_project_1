@@ -22,6 +22,9 @@ import Validation from "../../components/validation/Validation";
 
 const Home = () => {
 
+  //number of inputs in validation
+  const [NumberOfInputs,setNumber] = useState(0)
+
 
   const [projectName, setProjectname] = useState('')
   
@@ -60,6 +63,7 @@ const Home = () => {
   const [expArray, setExpArray] = useState([])
 
 
+  // storing expectation and column value
   const [col,setCol]  = useState('')
   const [exp,setExp]  = useState('')
 
@@ -71,7 +75,6 @@ const Home = () => {
   const handleChange = (e) => {
     // here api will be call to fetch input dataset name
     setProjectname(e.target.value)
-    console.log(e.target.value)
   }
 
 
@@ -87,18 +90,20 @@ const Home = () => {
   }
 
   const showPop = (index) => {
-
+    document.documentElement.scrollTop = 0;
 
     setCol(colArray[index])
     setExp(expArray[index])
     document.querySelector('.pop').classList.toggle('tran')
     document.querySelector('#overf').classList.toggle('overf')
-    console.log(document.querySelector('#overf'))
+    if(exp!==undefined){
+      setNumber(+exp.charAt(exp.length-1))
+    }
+
   }
 
   // saving into local or api
   const saveData = (inputs) => {
-    console.log(inputs)
     const data = {
       "id": Math.floor(Math.random() * 1000) + 1,
       "column": col,
@@ -108,21 +113,16 @@ const Home = () => {
     }
 
     const local = [...JSON.parse(localStorage.getItem('savedData')), data]
-    console.log(local)
     localStorage.setItem('savedData', JSON.stringify(local))
     document.querySelector('#overf').classList.toggle('overf')
-    // console.log(document.querySelector('#overf'))
     document.querySelector('.pop').classList.toggle('tran')
     document.querySelector('#overf').classList.remove('overf')
-    console.log(document.querySelector('#overf'))
     navigate('/')
 
   }
 
   useEffect(()=>{
-    console.log(col)
   
-    console.log(exp)
 
   },[col,exp])
 
@@ -158,7 +158,7 @@ const Home = () => {
                 >
 
                 
-                  {projects.map(p => (<MenuItem value={p}>{p}</MenuItem>))}
+                  {projects.map(p => (<MenuItem value={p} key={p}>{p}</MenuItem>))}
 
 
                 </Select>
@@ -168,7 +168,6 @@ const Home = () => {
               autoComplete="off"
                 onChange={(e) => {
                   setDataset(e.target.value)
-                  console.log(e.target.value)
                 }} />
               {projectName && (dataset && <Button variant="outlined" className="getB display-none"  onClick={getData}>Get</Button>)}
 
@@ -219,8 +218,8 @@ const Home = () => {
             <div class="pop">
               <div style={{ width: "100%" }} className="inpop">
                 <div className="vali">
-                  <i class="fa-solid fa-xmark" onClick={showPop}></i>
-                  <Validation  saveData={saveData} /></div>
+                  <i className="fa-solid fa-xmark" onClick={showPop}></i>
+                  <Validation  saveData={saveData} number={NumberOfInputs}/></div>
               </div>
             </div>
           </div>

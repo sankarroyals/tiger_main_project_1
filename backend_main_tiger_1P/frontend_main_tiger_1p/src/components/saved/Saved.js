@@ -107,7 +107,6 @@ const Saved = () => {
 
 
 
- rows.map(r=>console.log(r.inputs[0]))
 
 
 
@@ -172,10 +171,10 @@ const Saved = () => {
                   </TableCell>
                   <TableCell className="tableCell">
 
-                    <i class="fa-solid fa-pen-to-square edit" onClick={() => { edit(row.id) }}></i>
+                    <i className="fa-solid fa-pen-to-square edit" onClick={() => { edit(row.id) }}></i>
                   </TableCell>
                   <TableCell className="tableCell">
-                    <i class="fa-solid fa-trash del" onClick={() => { deletion(row.id) }}></i>
+                    <i className="fa-solid fa-trash del" onClick={() => { deletion(row.id) }}></i>
                   </TableCell>
 
                 </TableRow>}

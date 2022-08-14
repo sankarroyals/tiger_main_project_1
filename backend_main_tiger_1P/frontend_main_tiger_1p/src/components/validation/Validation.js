@@ -1,21 +1,22 @@
 import { Button, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import FormContainer from '../FormContainer'
 import { makeStyles } from "@material-ui/core/styles";
 import './validation.scss'
 
 
-const Validation = ({saveData}) => {
+const Validation = ({saveData,number}) => {
+    const [inArray,setInArray] = useState([])
     const [input1, setInput1] = useState(0)
     const [input2, setInput2] = useState(0)
     const [load,setLoad] = useState(false)
-
+   
     const handleInputs = ()=>{
         // you can call the api for validate
         setLoad(true)
 
-    console.log(input1,input2)
+        console.log(input1,input2)
        setTimeout(()=>{
         
         setLoad(false)
@@ -26,6 +27,15 @@ const Validation = ({saveData}) => {
        },3000)
     }
 
+    useEffect(()=>{
+
+        for(let i=0;i<number;i++){
+            setInArray(arr=>[...arr,1])
+        }
+    },[number])
+
+ 
+  
     return (
 
 
