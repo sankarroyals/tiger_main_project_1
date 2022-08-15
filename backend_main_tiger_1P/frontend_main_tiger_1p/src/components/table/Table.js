@@ -56,7 +56,7 @@ const List = ({ header, data, w, setColArray,setExpArray }) => {
                 <TableRow>
 
                   {header[0] === 'columns' ? <TableCell className="tableCell bo"
-                    style={{ cursor: "pointer" }}
+                    
                     onClick={(e) => {
                       if (e.target.className === 'col') {
                         setColArray(prev=>[...prev,e.target.innerHTML])
