@@ -111,9 +111,16 @@ const Home = () => {
       "Database": projectName,
       "inputs":[inputs]
     }
+   
+    if(!localStorage.getItem('savedData')){
+        localStorage.setItem('savedData',JSON.stringify([data]))
+    }
+    
 
-    const local = [...JSON.parse(localStorage.getItem('savedData')), data]
-    localStorage.setItem('savedData', JSON.stringify(local))
+    else{
+      const local = [...JSON.parse(localStorage.getItem('savedData')), data]
+      localStorage.setItem('savedData', JSON.stringify(local))
+    }
     document.querySelector('#overf').classList.toggle('overf')
     document.querySelector('.pop').classList.toggle('tran')
     document.querySelector('#overf').classList.remove('overf')
